@@ -1,0 +1,13 @@
+canvas {
+    position: absolute;
+    float: left;
+    top: 10px;
+    height: 500px;
+    width: 500px;
+}
+p {
+    position: absolute;
+    left: 813px;
+    margin: 0px;
+    padding: 0px;
+}
