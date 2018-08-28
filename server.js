@@ -1,18 +1,21 @@
 var express = require('express');
 var app = express();
 var Game = require('./game.js')
-var listener = app.listen(process.env.PORT, function() {
+var listener = app.listen('80', function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 var io = require('socket.io')(listener)
-var game = new Game(50, 50, 50, 50)
+var game = new Game(50, 100, 15, 15)
 setInterval(frame, 1000/10)
 
 io.on('connection', function(socket) {
-    console.log('yo waddup')
     game.addSnake(socket.id)
     socket.on('facing', function(data) {
-        game.setDirection(socket.id, data)
+        
+        game.setFacing(socket.id, data)
+    })
+    socket.on('disconnect', function() {
+        game.removeSnake(socket.id)
     })
 })
 
